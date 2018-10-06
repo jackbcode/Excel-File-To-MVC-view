@@ -1,0 +1,80 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+<br />
+
+<h2>
+    Upload Excel File
+</h2>
+<hr />
+
+
+<div>
+    @if (ViewBag.Message != null)
+    {
+        <span class="alert alert-success"> @ViewBag.Message</span>
+    }
+
+    <br /><br />
+    <div>
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <input type="file" id="fileUpload" name="FileUpload" /><br />
+            <br />
+            <input type="submit" class="btn btn-primary" name="Upload" id="fileUploadExcel" value="Upload" />
+        }
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+
+        $('#fileUploadExcel').click(function (e) {
+            if ($('#fileUpload').val() === "") {
+                alert("Oops...!!! Please select a file")
+                return false;
+            }
+
+        });
+
+
+
+
+    </script>
+
+
+    @*$(document).ready(function () {
+
+        $('#fileSubmit').click(function () {
+        var filePath = $('#inputFilePath').val();
+        $("#uploading").html("Uploading.....");
+        $.ajax({
+        url: '@Url.Action("Upload")',
+        cashe: false,
+        type: 'POST',
+        data: { 'filePath': filePath },
+        beforeSend: function (data){
+        $('#goCompare').html('<img id="ajax" src="/Content/Images/ajax-loader.gif" />');
+        },
+        success: function (data) {
+        $('#goCompare').html(data.success);
+        }
+        });
+        debugger
+        });
+        }*@
+}

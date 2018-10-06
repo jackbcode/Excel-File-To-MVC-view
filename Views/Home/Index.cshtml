@@ -1,0 +1,69 @@
+﻿
+
+@model IEnumerable<DailyCalls.Models.DailyCall>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<br/>
+<h2>Calls To Make</h2>
+<br />
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientReference)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.TelephoneNumber)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastCalled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutcomeId)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientReference)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.TelephoneNumber)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastCalled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallOutcomeList.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Call", "Index", "CallScreen", new { reference = item.ClientReference },
+                new { @class = "btn btn-primary", target = "_blank" })
+        </td>
+    </tr>
+    }
+
+</table>
+
+

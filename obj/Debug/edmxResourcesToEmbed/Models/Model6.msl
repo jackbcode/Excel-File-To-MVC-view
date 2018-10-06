@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Phone_SystemEntities6">
+    <EntitySetMapping Name="CallOutcomeLists">
+      <EntityTypeMapping TypeName="Model.CallOutcomeList">
+        <MappingFragment StoreEntitySet="CallOutcomeList">
+          <ScalarProperty Name="OutcomeID" ColumnName="OutcomeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyCalls">
+      <EntityTypeMapping TypeName="Model.DailyCall">
+        <MappingFragment StoreEntitySet="DailyCalls">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ClientReference" ColumnName="ClientReference" />
+          <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="OutcomeId" ColumnName="OutcomeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pr_InsertCallDetails" FunctionName="Model.Store.pr_InsertCallDetails" />
+  </EntityContainerMapping>
+</Mapping>

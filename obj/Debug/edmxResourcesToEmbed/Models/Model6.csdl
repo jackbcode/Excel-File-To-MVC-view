@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CallOutcomeList">
+    <Key>
+      <PropertyRef Name="OutcomeID" />
+    </Key>
+    <Property Name="OutcomeID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DailyCalls" Relationship="Self.FK__DailyCall__Outco__47DBAE45" FromRole="CallOutcomeList" ToRole="DailyCalls" />
+  </EntityType>
+  <EntityType Name="DailyCall">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClientReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="OutcomeId" Type="Int32" />
+    <NavigationProperty Name="CallOutcomeList" Relationship="Self.FK__DailyCall__Outco__47DBAE45" FromRole="DailyCalls" ToRole="CallOutcomeList" />
+  </EntityType>
+  <Association Name="FK__DailyCall__Outco__47DBAE45">
+    <End Role="CallOutcomeList" Type="Self.CallOutcomeList" Multiplicity="0..1" />
+    <End Role="DailyCalls" Type="Self.DailyCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CallOutcomeList">
+        <PropertyRef Name="OutcomeID" />
+      </Principal>
+      <Dependent Role="DailyCalls">
+        <PropertyRef Name="OutcomeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Phone_SystemEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CallOutcomeLists" EntityType="Self.CallOutcomeList" />
+    <EntitySet Name="DailyCalls" EntityType="Self.DailyCall" />
+    <AssociationSet Name="FK__DailyCall__Outco__47DBAE45" Association="Self.FK__DailyCall__Outco__47DBAE45">
+      <End Role="CallOutcomeList" EntitySet="CallOutcomeLists" />
+      <End Role="DailyCalls" EntitySet="DailyCalls" />
+    </AssociationSet>
+    <FunctionImport Name="pr_InsertCallDetails">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="ClientReference" Mode="In" Type="String" />
+      <Parameter Name="TelephoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+      <Parameter Name="OutcomeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

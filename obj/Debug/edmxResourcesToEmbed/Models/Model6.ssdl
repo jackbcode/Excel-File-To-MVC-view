@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CallOutcomeList">
+    <Key>
+      <PropertyRef Name="OutcomeID" />
+    </Key>
+    <Property Name="OutcomeID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DailyCalls">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="ClientReference" Type="varchar" MaxLength="50" />
+    <Property Name="TelephoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="OutcomeId" Type="int" />
+  </EntityType>
+  <Association Name="FK__DailyCall__Outco__47DBAE45">
+    <End Role="CallOutcomeList" Type="Self.CallOutcomeList" Multiplicity="0..1" />
+    <End Role="DailyCalls" Type="Self.DailyCalls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CallOutcomeList">
+        <PropertyRef Name="OutcomeID" />
+      </Principal>
+      <Dependent Role="DailyCalls">
+        <PropertyRef Name="OutcomeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="pr_InsertCallDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ClientReference" Type="varchar" Mode="In" />
+    <Parameter Name="TelephoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+    <Parameter Name="OutcomeId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CallOutcomeList" EntityType="Self.CallOutcomeList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DailyCalls" EntityType="Self.DailyCalls" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DailyCall__Outco__47DBAE45" Association="Self.FK__DailyCall__Outco__47DBAE45">
+      <End Role="CallOutcomeList" EntitySet="CallOutcomeList" />
+      <End Role="DailyCalls" EntitySet="DailyCalls" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
